@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def adicao(x, y):
     return x + np.add(x, y)
@@ -21,10 +22,9 @@ def raiz_quadrada(x):
     return np.sqrt(x)
 
 def fatorial(x):
-    fat = 1
-    for i in range(x+1):
-        fat *= i
-    return fat
+    if x < 0:
+        return "Erro: Fatorial de número negativo"
+    return math.factorial(x)
 
 def logaritmo_natural(x):
     if x <= 0:

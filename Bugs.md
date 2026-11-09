@@ -39,12 +39,6 @@
 - **Esperado:** `5.0`
 - **Obtido:** `7.0`
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  Resultado: 7.0
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Alta
@@ -81,15 +75,6 @@ Retornar `x + y` (ou `np.add(x, y)`), sem somar `x` novamente.
 - **Esperado:** Mensagem como `Erro: Divisão por zero`, mantendo o programa em execução.
 - **Obtido:** O programa é interrompido com exceção.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  Traceback (most recent call last):
-    ...
-  ZeroDivisionError: float division by zero
-  ```
-
 ### Severidade e impacto
 - **Severidade:** Média
 - **Impacto:** Um erro comum de uso faz a calculadora fechar abruptamente, e o usuário perde a sessão.
@@ -125,12 +110,6 @@ Verificar `if y == 0` e retornar a mensagem de erro, no mesmo padrão das outras
 - **Esperado:** `fatorial(5) = 120`, `fatorial(0) = 1`, `fatorial(-3)` com mensagem de erro.
 - **Obtido:** `fatorial(5) = 0`, `fatorial(0) = 0`, `fatorial(-3) = 1`.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  Resultado: 0
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Crítica
@@ -141,7 +120,7 @@ Iniciar o laço em 1 (`range(1, x + 1)`) ou usar `math.factorial`. Tratar `x < 0
 
 ### Registro e acompanhamento
 - **Data de identificação:** 09/11/2026
-- **Status:** Não resolvido _(bug escolhido para correção via TDD)_
+- **Status:** Resolvido
 
 ---
 
@@ -167,12 +146,6 @@ Iniciar o laço em 1 (`range(1, x + 1)`) ou usar `math.factorial`. Tratar `x < 0
 - **Esperado:** Aproximadamente `1.0`.
 - **Obtido:** O programa é interrompido com exceção.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  AttributeError: module 'numpy' has no attribute 'ln'
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Alta
@@ -209,12 +182,6 @@ Trocar `np.ln(x)` por `np.log(x)`.
 - **Esperado:** `2.0`
 - **Obtido:** `4.605170185988092`
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  Resultado: 4.605170185988092
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Alta
@@ -251,13 +218,6 @@ Trocar `np.log(x)` por `np.log10(x)`.
 - **Esperado:** `Erro: Logaritmo de número não positivo`
 - **Obtido:** `-inf`, acompanhado de aviso do NumPy.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  RuntimeWarning: divide by zero encountered in log
-  Resultado: -inf
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Média
@@ -296,14 +256,6 @@ Alterar a condição para `x <= 0`.
 - **Esperado:** Opção 10 com 30° retorna `0.5`. Opção 11 com 60° retorna `0.5`. Opção 12 com 45° retorna `1.0`.
 - **Obtido:** Opção 10 exibe "Operação inválida. Tente novamente." As opções 11 e 12 encerram o programa com exceção.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  NameError: name 'cosseno' is not defined
-  NameError: name 'tangente' is not defined
-  ```
-
 ### Severidade e impacto
 - **Severidade:** Alta
 - **Impacto:** Três funcionalidades anunciadas no menu estão indisponíveis, e duas delas derrubam o programa.
@@ -339,12 +291,6 @@ Implementar `seno`, `cosseno` e `tangente` (com conversão de graus para radiano
 - **Esperado:** Mensagem como "Entrada inválida" e nova solicitação do valor.
 - **Obtido:** O programa é interrompido com exceção.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  ValueError: could not convert string to float: 'abc'
-  ```
 
 ### Severidade e impacto
 - **Severidade:** Média
@@ -380,13 +326,6 @@ Envolver as leituras em `try/except ValueError` (ou criar uma função auxiliar 
 - **Esperado:** A importação apenas carrega as funções, e o menu só roda ao executar `python Calculadora.py`.
 - **Obtido:** O menu é exibido na importação e o pytest falha ao tentar ler a entrada padrão.
 
-### Evidências
-- **Screenshot:** _inserir print do terminal_
-- **Log:**
-  ```
-  OSError: pytest: reading from stdin while output is captured!  Consider using `-s`.
-  ```
-
 ### Severidade e impacto
 - **Severidade:** Média
 - **Impacto:** Impede testes automatizados e o reaproveitamento das funções em outros módulos. É pré-requisito para aplicar TDD.
@@ -414,8 +353,8 @@ if __name__ == "__main__":
 ## Correção aplicada (preencher após o TDD)
 
 - **Bug corrigido:** #3, Fatorial sempre retorna 0
-- **O que foi alterado:** _descrever_
-- **Por que foi alterado:** _descrever_
-- **Como resolve o bug:** _descrever_
-- **Testes:** _listar os testes e o resultado do `pytest`_
-- **Commit:** _hash ou mensagem do commit_
+- **O que foi alterado:** laço range(x+1) substituído por math.factorial, com validação de número negativo.
+- **Por que foi alterado:** o laço começava em 0, então multiplicava o acumulador por zero e o resultado era sempre 0.
+- **Como resolve o bug:** o fatorial passa a ser calculado corretamente, e entradas negativas retornam mensagem de erro.
+- **Testes:** 4 testes em test_calculadora.py, todos passando.
+- **Commit:** "fix: corrige fatorial (range começava em 0) e atualiza Bugs.md"
